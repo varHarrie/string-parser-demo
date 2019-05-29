@@ -34,8 +34,6 @@ export default class StringStream {
       (match instanceof RegExp && match.test(ch)) ||
       (typeof match === 'function' && match(ch))
 
-    console.log(match instanceof RegExp && match.test(ch), match, ch)
-
     if (ok) {
       this.pos++
       return ch
@@ -70,6 +68,12 @@ export default class StringStream {
     if (match && consume) this.pos += match[0].length
 
     return match
+  }
+
+  skipToEnd() {
+    const str = this.source.slice(this.pos)
+    this.pos = this.source.length
+    return str
   }
 
   current() {
